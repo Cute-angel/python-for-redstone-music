@@ -30,4 +30,5 @@ class Msglist:
         nowTime = 0.0
         mid = mido.MidiFile(midfile)
         for msg in mid:
-            if msg.type == 
+            if msg.type == "note_on":
+                
