@@ -24,17 +24,17 @@ class msgs:
                 self.msg.append(msg)
         else:
             pass
-    def load(self, newMsg):   
+    def append(self,newMsg):   
         self.msg.append(newMsg)
 
 class Msglist:
     __Msglist = []
     def findByTick(self,tick):
-        for Msgs in __Msglist:
+        for Msgs in self.__Msglist:
             if Msgs.tick == tick:
                 return msgs
         return msgs(tick)
-    def load(midfile,tickrate=20):
+    def load(self,midfile,tickrate=20):
         nowTime = 0.0
         mid = mido.MidiFile(midfile)
         for msg in mid:
@@ -43,3 +43,4 @@ class Msglist:
                     nowTime += msg.time
                 tick = round(nowTime*tickrate)
                 msgs = self.findByTick(tick)
+                msgs.append(msg("note_on"))
