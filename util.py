@@ -13,3 +13,10 @@ def many2many(start,end):
         for p2 in secondp:
             finlist.append((p1,p2))
     return finlist
+
+
+class point:
+    def __init__(self,note,tick,y=32):
+        self.x = note
+        self.y = y
+        self.z = tick
