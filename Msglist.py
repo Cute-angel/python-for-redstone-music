@@ -17,29 +17,33 @@ class msg:
 
 class msgs:
     def __init__(self,tick,msgs=None):
-        self.msg  = []
+        self.msgs = []
         self.tick = tick
         if msgs != None:
             for msg in msgs:
                 self.msg.append(msg)
         else:
             pass
-    def load(self, newMsg):   
-        self.msg.append(newMsg)
+    def append(self, newMsg):   
+        self.msgs.append(newMsg)
 
 class Msglist:
     __Msglist = []
     def findByTick(self,tick):
         for Msgs in __Msglist:
             if Msgs.tick == tick:
-                return msgs
-        return msgs(tick)
+                return Msgs
+        newmsgs = msgs(tick)
+        __Msglist.append(newmsgs)
+        return newmsgs
     def load(midfile,tickrate=20):
         nowTime = 0.0
         mid = mido.MidiFile(midfile)
         for msg in mid:
-            if msg.type == "note_on" or "note_off":
+            if msg.type == "note_on":
                 if msg.time > 0:
                     nowTime += msg.time
                 tick = round(nowTime*tickrate)
                 msgs = self.findByTick(tick)
+                msg = msg("note_on",tick,msg.track,msg.channel,msg.note,msg.velocity)
+                msgs.append(msg)
