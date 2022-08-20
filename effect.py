@@ -166,7 +166,17 @@ class soma(commander):
         return self.buildList
 
 class redstoneBlock(commander):
-    def __init__(self, msgLists) -> None:
+    def __init__(self, msgLists,y) -> None:
         super().__init__(msgLists)
+        self.y = y
     def load(self):
         buildList = self.initSequence()
+        cleanList = self.initSequence()
+        for msgList in self.msgLists:
+            for note in msgList.note_list:
+                buildList[note.tick].append(
+                    f"setblock {note.tick} {self.y} {note.note} minecraft:redstone_block 0 replace"
+                )
+                cleanList[note.tick].append(
+                    f"setblock {note.tick} {self.y} {note.note} minecraft:air 0 replace"
+                )

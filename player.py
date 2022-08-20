@@ -1,7 +1,7 @@
 from utils import commander
 
 class Player(commander):
-    def generatePlayList(self) -> list:
+    def load(self) -> list:
         playList = self.initSequence() # 生成二维列表
         for msgList in self.msgLists:
             for note in msgList.note_list:

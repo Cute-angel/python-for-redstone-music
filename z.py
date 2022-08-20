@@ -78,7 +78,7 @@ for i,track in enumerate(tracks):
 cPlayer = Player(Msglists)
 cEffect = soma(Msglists,1)
 b= cEffect.load()
-a = cPlayer.generatePlayList()
+a = cPlayer.load()
 
 finalList = commander.merge(a,b)
 build = builder(finalList,-5,64)
